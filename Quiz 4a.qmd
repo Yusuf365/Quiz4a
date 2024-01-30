@@ -1,0 +1,68 @@
+---
+title: "Quiz 4a"
+author: "Mohammed Yusuf Shaikh"
+format: html
+---
+
+---
+title: "Quiz 4a"
+author: "Mohammed Yusuf Shaikh"
+---
+
+```{r}
+install.packages('ggplot2')
+install.packages('tidyverse')
+install.packages('janitor')
+install.packages('dplyr')
+```
+
+
+```{r}
+
+
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# Simulating the data
+set.seed(0)  # For reproducibility
+simulated_data <- tibble(
+  Friend_id = 1:20,
+  True_Height = runif(20, 40, 80),
+  Edward = True_Height + 5,
+  Hugo = True_Height - 5,
+  Lucy = True_Height + runif(20, -5, 5)
+)
+
+```
+
+```{r}
+# Creating the ggplot
+ggplot(simulated_data, aes(x = Friend_id)) +
+  geom_line(aes(y = True_Height, group = 1), color = "black", size = 1, alpha = 0.6) +
+  geom_point(aes(y = True_Height), color = "black", size = 3, alpha = 0.6) +
+  geom_point(aes(y = Edward), color = "blue", size = 1) +
+  geom_point(aes(y = Hugo), color = "red", size = 1) +
+  geom_point(aes(y = Lucy), color = "green", size = 1) +
+  labs(x = "Friend ID", y = "Height (cm)", 
+       title = "Comparison of True Height vs. Measured Heights") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+# Test
+length(unique(simulated_data$Friend_id)) == 20
+
+# Test for minimum and maximum values in True_Height
+min(simulated_data$True_Height) >= 40
+max(simulated_data$True_Height) <= 80
+
+# Test 3
+class(simulated_data$True_Height) == "numeric"
+```
+
+
+
+
