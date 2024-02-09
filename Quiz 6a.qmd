@@ -1,11 +1,11 @@
 ---
-title: "Quiz 4a"
+title: "Quiz 6a"
 author: "Mohammed Yusuf Shaikh"
 format: html
 ---
 
 ---
-title: "Quiz 4a"
+title: "Quiz 6a"
 author: "Mohammed Yusuf Shaikh"
 ---
 
@@ -15,6 +15,11 @@ library(tibble)
 
 # Define the time range
 time_range <- seq(from = 9, to = 17, by = 1)
+
+# Simulating the efficiency of two employees with a positive correlation
+employee_1_customers <- round(base_customers + runif(length(hours_of_operation), min=-2, max=2))
+employee_2_customers <- round(base_customers + runif(length(hours_of_operation), min=-2, max=2) * 0.8)
+
 
 # Generate simulated shop data with just time
 simulated_shop_data <- tibble(
