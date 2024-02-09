@@ -10,25 +10,60 @@ author: "Mohammed Yusuf Shaikh"
 ---
 
 ```{r}
-# Load necessary libraries
+install.packages("dplyr")
+install.packages("tidyverse")
+install.packages("ggplot2")
+```
+
+```{r}
 library(tibble)
+library(dplyr)
 
-# Define the time range
-time_range <- seq(from = 9, to = 17, by = 1)
+set.seed(42) # For reproducibility
 
-# Simulating the efficiency of two employees with a positive correlation
-employee_1_customers <- round(base_customers + runif(length(hours_of_operation), min=-2, max=2))
-employee_2_customers <- round(base_customers + runif(length(hours_of_operation), min=-2, max=2) * 0.8)
+# Generating hours of operation
+hours <- 9:17
 
 
-# Generate simulated shop data with just time
-simulated_shop_data <- tibble(
-  Time = paste(time_range, sep = ""),
-  Employee1_Customers = round(runif(length(time_range), 5, 10)),
-  Employee2_Customers = round(runif(length(time_range), 5, 10))
+# Creating a tibble to hold the data
+stimulated_data <- tibble(
+  Hour = hours,
+  Employee_1_Customers = sample(5:15, length(hours), replace = TRUE),
+  Employee_2_Customers = customers_employee1 + sample(-2:3, length(hours), replace = TRUE)
 )
 
-print(simulated_shop_data)
+
+print(stimulated_data)
+
+
+```
+```{r}
+# Using Stimulated Data
+library(ggplot2)
+ggplot(stimulated_data, aes(x = Hour)) +
+  geom_point(aes(y = Employee_1_Customers, color = "Employee 1")) +
+  geom_point(aes(y = Employee_2_Customers, color = "Employee 2")) +
+  labs(y = "Customers Served", title = "Number of Customers Served Per Hour by Each Employee") +
+  scale_color_manual(values = c("Employee 1" = "blue", "Employee 2" = "red")) +
+  theme_minimal()
+
+```
+```{r}
+# Make Test
+
+# Test 1
+stimulated_data$Hour |>
+  unique() |>
+  length() == 9
+# Test 2
+stimulated_data$Employee_1_Customers |> min() == 5
+# test 3
+stimulated_data$Employee_1_Customers |> class() == "integer"
+# Test 4
+stimulated_data$Employee_1_Customers |> max() <= 15
+# Test 5
+stimulated_data$Employee_2_Customers |> class() == "integer"
+
 
 ```
 
