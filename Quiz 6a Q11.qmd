@@ -1,0 +1,44 @@
+---
+title: "Quiz6a Q11"
+author: "Mohammed Yusuf Shaikh"
+format: html
+---
+
+```{r}
+library(tibble)
+library(testthat)
+
+# Simulated dataset of German cities
+german_cities <- c("Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Rostock")
+
+# Function to generate simulated data
+generate_simulated_data <- function(cities) {
+  # Create a tibble with the given cities
+  data <- tibble(City = cities)
+  return(data)
+}
+
+# Generate simulated data
+simulated_data <- generate_simulated_data(german_cities)
+
+# Define the expected list of German cities
+expected_cities <- german_cities
+
+# Test 1
+test_that("All expected German cities are present", {
+  expect_equal(sort(simulated_data$City), sort(expected_cities))
+})
+
+# Test 2
+test_that("No extra cities are present in the dataset", {
+  expect_length(simulated_data$City, length(expected_cities))
+})
+
+# Test 3
+test_that("Unique Test", {
+  expect_true(length(unique(simulated_data$City)) == length(simulated_data$City))
+})
+
+
+```
+
