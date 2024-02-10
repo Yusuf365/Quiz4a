@@ -8,20 +8,18 @@ format: html
 library(tibble)
 library(testthat)
 
-# Simulated dataset of German cities
+
 german_cities <- c("Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt", "Rostock")
 
-# Function to generate simulated data
+
 generate_simulated_data <- function(cities) {
   # Create a tibble with the given cities
   data <- tibble(City = cities)
   return(data)
 }
 
-# Generate simulated data
+# Simulated data
 simulated_data <- generate_simulated_data(german_cities)
-
-# Define the expected list of German cities
 expected_cities <- german_cities
 
 # Test 1
